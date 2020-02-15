@@ -3,6 +3,7 @@ package com.ipiecoles.java.audio.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "artist")
 public class Artiste {
 
     @Id

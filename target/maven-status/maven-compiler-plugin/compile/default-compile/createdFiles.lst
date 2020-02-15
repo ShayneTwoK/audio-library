@@ -1,0 +1,7 @@
+com\ipiecoles\java\audio\repository\AlbumRepository.class
+com\ipiecoles\java\audio\model\Artiste.class
+com\ipiecoles\java\audio\repository\ArtisteRepository.class
+com\ipiecoles\java\audio\AudioApplication.class
+com\ipiecoles\java\audio\model\Album.class
+com\ipiecoles\java\audio\controller\ArtisteController.class
+com\ipiecoles\java\audio\security\SimpleCorsFilter.class
