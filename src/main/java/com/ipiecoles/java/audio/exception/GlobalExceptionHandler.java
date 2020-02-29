@@ -10,6 +10,7 @@ import javax.persistence.EntityNotFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Exercice 1 retourner erreur 404 quand id artiste 0
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleEntityNotFoundException(EntityNotFoundException entityNotFoundException) {
