@@ -1,6 +1,7 @@
 //package com.ipiecoles.java.audio.service;
 //
 //
+//import com.ipiecoles.java.audio.exception.ConflictException;
 //import com.ipiecoles.java.audio.model.Artiste;
 //import com.ipiecoles.java.audio.repository.ArtisteRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@
 //import org.springframework.data.domain.Sort;
 //import org.springframework.stereotype.Service;
 //import org.springframework.validation.annotation.Validated;
+//import org.springframework.web.client.HttpClientErrorException;
 //
 //import javax.persistence.EntityNotFoundException;
+//import javax.validation.Valid;
 //import javax.validation.constraints.Max;
 //import javax.validation.constraints.Min;
 //import java.lang.reflect.Field;
@@ -28,6 +31,13 @@
 //
 //    @Autowired
 //    private ArtisteRepository artisteRepository;
+//
+//    public <T extends Artiste> T ajoutArtiste(@Valid T e) throws ConflictException {
+//        if(artisteRepository.existsById(e.getId())) {
+//            throw new ConflictException("L'artiste " + e.getId() + " existe déjà !");
+//        }
+//        return artisteRepository.save(e);
+//    }
 //
 //    public Page<Artiste> findArtistesByName(
 //            String name,

@@ -12,4 +12,6 @@ public interface BaseArtisteRepository<T extends Artiste> extends PagingAndSorti
     Optional<T> findById(Long id);
 
     Page<T> findLesArtistesByName(String name, Pageable pageable);
+
+    Artiste findByName(String name);
 }
