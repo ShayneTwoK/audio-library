@@ -30,16 +30,26 @@ public class ArtisteController {
         return artiste.get();
     }
 
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, params = "name")
-    public Page<Artiste> findLesArtistesByName(
-            @RequestParam("name" ) String name,
+    @GetMapping(params = "name", produces = MediaType.APPLICATION_JSON_VALUE)
+    // Exercice 2 parametres name et gestion de la pagination pour la recherche
+    public Page<Artiste> findUnArtisteByName(
+            @RequestParam("name") String name,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size,
-            @RequestParam("sortDirection") Sort.Direction sortDirection,
-            @RequestParam("sortProperty") String sortProperty) {
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
-        Pageable pageable = PageRequest.of(page,size, sortDirection,sortProperty);
+        Pageable pageable = PageRequest.of(page,size);
         return artisteRepository.findLesArtistesByName(name, pageable);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    // Exercice 3 affichage de tout les artistes et gestion de pagination
+    public Page<Artiste> findLesArtistes(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "sortProperty", defaultValue = "name") String sortProperty,
+            @RequestParam(value = "sortDirection", defaultValue = "ASC") Sort.Direction sortDirection) {
+
+        Pageable pageable = PageRequest.of(page,size, sortDirection, sortProperty);
+        return artisteRepository.findAll(pageable);
+    }
 }
