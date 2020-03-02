@@ -13,12 +13,21 @@ public class Album {
     @Column(name = "title")
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name ="artistId", nullable = false)
+    private Artiste artiste;
+
     public Album() {
     }
 
-    public Album(Long id, String title) {
+    public Artiste getArtiste() {
+        return artiste;
+    }
+
+    public Album(Long id, String title, Artiste artiste) {
         this.id = id;
         this.title = title;
+        this.artiste = artiste;
     }
 
     public Long getId() { return id; }

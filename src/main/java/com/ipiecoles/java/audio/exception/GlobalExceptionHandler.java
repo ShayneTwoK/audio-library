@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
         return entityNotFoundException.getMessage();
     }
 
-    // Exercice 2 retouner erreur 409 quand artiste existe deja
+    // Exercice 2 retourner erreur 409 quand artiste existe deja
     @ExceptionHandler(ConflictException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleConflictException(ConflictException e) {

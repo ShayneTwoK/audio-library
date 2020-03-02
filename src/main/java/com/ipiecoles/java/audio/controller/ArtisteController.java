@@ -3,19 +3,18 @@ package com.ipiecoles.java.audio.controller;
 import com.ipiecoles.java.audio.exception.ConflictException;
 import com.ipiecoles.java.audio.model.Artiste;
 import com.ipiecoles.java.audio.repository.ArtisteRepository;
-//import com.ipiecoles.java.audio.service.ArtisteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
+
+//import com.ipiecoles.java.audio.service.ArtisteService;
 
 @RestController
 @RequestMapping("/artists")
@@ -79,5 +78,12 @@ public class ArtisteController {
             @PathVariable("id") Long id,
             @RequestBody Artiste artiste) {
         return artisteRepository.save(artiste);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    // Exercice 6 Supprimer un artiste existant
+    public void supprimerUnArtiste(
+            @PathVariable("id") Long id) {
+        artisteRepository.deleteById(id);
     }
 }
