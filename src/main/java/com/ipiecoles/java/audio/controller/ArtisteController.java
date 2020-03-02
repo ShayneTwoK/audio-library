@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -27,7 +28,8 @@ public class ArtisteController {
 //    private ArtisteService artisteService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Artiste findById(@PathVariable(value = "id") Long id) {
+    public Artiste findById(
+            @PathVariable(value = "id") Long id) {
         // Exercice 1 retourner erreur 404 quand id artiste n'existe pas
         Optional<Artiste> artiste = artisteRepository.findById(id);
         if (!artiste.isPresent()) {
@@ -65,9 +67,17 @@ public class ArtisteController {
             @RequestBody Artiste artiste) throws ConflictException {
         Artiste artisteAjouter = artisteRepository.findByName(artiste.getName());
 
-        if (artisteAjouter != null){
-            throw new ConflictException("L'artiste " + artiste.getId() + " existe déjà !");
+        if (artisteAjouter != null) {
+            throw new ConflictException("L'artiste " + artisteAjouter.getName().toUpperCase() + " existe déjà !");
         }
         return this.artisteRepository.save(artiste);
+    }
+
+    @PutMapping(value = "/{id}")
+    // Exercice 5 Modifier un artiste existant
+    public Artiste miseAJourArtiste(
+            @PathVariable("id") Long id,
+            @RequestBody Artiste artiste) {
+        return artisteRepository.save(artiste);
     }
 }
